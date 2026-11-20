@@ -1,0 +1,33 @@
+
+name: Python CI/CD Pipeline
+
+on:
+  push:
+    branches: [ "main" ]
+
+  pull_request:
+    branches: [ "main" ]
+
+  workflow_dispatch:
+
+jobs:
+  build-and-test:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+
+      - name: Setup Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Run Python Program
+        run: python main.py
+
+      - name: Install Pytest
+        run: pip install pytest
+
+      - name: Run Tests
+        run: pytest
